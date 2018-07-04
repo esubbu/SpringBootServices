@@ -29,7 +29,11 @@ public class MovieRestController {
 	@CrossOrigin(origins = "*")
 	@PostMapping(path="/insertMovie",consumes = "application/json")
 	public String insertMovie(@RequestBody Movie movie){
+<<<<<<< HEAD
 		LOGGER.info("***********insertMovie action called..");
+=======
+		LOGGER.info("insertMovie action called..");
+>>>>>>> 24d9dc48f5f266f590e231576b7514b5c6178c7b
 		mongoTemplate.save(movie);
 		return "successfully inserted sd!!";
 		
@@ -48,7 +52,11 @@ public class MovieRestController {
 	@CrossOrigin(origins = "*")
 	@GetMapping(path="/getMovies",produces="application/json")
 	public ArrayList<Movie> getMovies(){
+<<<<<<< HEAD
 		LOGGER.info("**********getMovies action called..");
+=======
+		LOGGER.info("getMovies action called..");
+>>>>>>> 24d9dc48f5f266f590e231576b7514b5c6178c7b
 
 		ArrayList<Movie> movie=(ArrayList<Movie>) mongoTemplate.findAll(Movie.class);
 		return movie;
@@ -57,7 +65,11 @@ public class MovieRestController {
 	
 	@GetMapping(path="/welcome")
 	public String getWelcomeMsg(){
+<<<<<<< HEAD
 		LOGGER.info("*****************getWelcomeMsg action called..");
+=======
+		LOGGER.info("getWelcomeMsg action called..");
+>>>>>>> 24d9dc48f5f266f590e231576b7514b5c6178c7b
 		return "Welcome!!!!!!!!!!! Angular services New";
 		
 	}
