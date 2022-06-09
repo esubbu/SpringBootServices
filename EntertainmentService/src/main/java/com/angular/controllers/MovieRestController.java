@@ -1,13 +1,16 @@
 package com.angular.controllers;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
+import com.angular.service.MovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+/*import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Query;*/
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,59 +20,51 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.angular.models.Movie;
 
-@CrossOrigin(maxAge = 3600)
+
 @RestController
 public class MovieRestController {
 	
     private static final Logger LOGGER = LoggerFactory.getLogger(MovieRestController.class);
 
 	@Autowired
-	MongoTemplate mongoTemplate;
+	MovieService movieService;
 
-	@CrossOrigin(origins = "*")
 	@PostMapping(path="/insertMovie",consumes = "application/json")
-	public String insertMovie(@RequestBody Movie movie){
-<<<<<<< HEAD
+	public Movie insertMovie(@RequestBody Movie movie){
 		LOGGER.info("***********insertMovie action called..");
-=======
-		LOGGER.info("insertMovie action called..");
->>>>>>> 24d9dc48f5f266f590e231576b7514b5c6178c7b
-		mongoTemplate.save(movie);
-		return "successfully inserted sd!!";
+		Movie movie1=new Movie();
+		try{
+			movie1=movieService.insertMovie(movie);
+		}catch (Exception e){
+			LOGGER.error("Exception Occured While inserting data "+e);
+		}
+
+		return movie1;
 		
 	}
-	
-	@CrossOrigin(origins = "*")
+
 	@GetMapping("/getMovie/{id}")
-	public ArrayList<Movie> getMovieById(@PathVariable String id){
-		Query query = new Query();
-		query.addCriteria(Criteria.where("id").is(Long.parseLong(id)));
-		ArrayList<Movie> movie=(ArrayList<Movie>) mongoTemplate.find(query, Movie.class);
+	public Optional<Movie> getMovieById(@PathVariable String id){
+		LOGGER.info("***********getMovieById action called..");
+
+		Optional<Movie> movie= movieService.getMovieById(Long.parseLong(id));
 		return movie;
 		
 	}
 	
-	@CrossOrigin(origins = "*")
+
 	@GetMapping(path="/getMovies",produces="application/json")
 	public ArrayList<Movie> getMovies(){
-<<<<<<< HEAD
 		LOGGER.info("**********getMovies action called..");
-=======
-		LOGGER.info("getMovies action called..");
->>>>>>> 24d9dc48f5f266f590e231576b7514b5c6178c7b
 
-		ArrayList<Movie> movie=(ArrayList<Movie>) mongoTemplate.findAll(Movie.class);
+		ArrayList<Movie> movie=(ArrayList<Movie>) movieService.getMovies();
 		return movie;
 		
 	}
 	
 	@GetMapping(path="/welcome")
 	public String getWelcomeMsg(){
-<<<<<<< HEAD
-		LOGGER.info("*****************getWelcomeMsg action called..");
-=======
-		LOGGER.info("getWelcomeMsg action called..");
->>>>>>> 24d9dc48f5f266f590e231576b7514b5c6178c7b
+		LOGGER.info("*************getWelcomeMsg action called..");
 		return "Welcome!!!!!!!!!!! Angular services New";
 		
 	}

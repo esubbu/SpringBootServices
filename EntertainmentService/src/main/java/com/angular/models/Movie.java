@@ -1,10 +1,11 @@
 package com.angular.models;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Document(collection = "movie")
-public class Movie {
+@Entity
+@Table public class Movie {
 	
 	@Id
 	private long id;

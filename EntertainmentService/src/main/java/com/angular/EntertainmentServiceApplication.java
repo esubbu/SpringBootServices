@@ -7,17 +7,12 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan("com")
-@SpringBootApplication
-public class EntertainmentServiceApplication extends SpringBootServletInitializer {
 
+@SpringBootApplication
+@ComponentScan(basePackages ={"com.angular.*"})
+public class EntertainmentServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EntertainmentServiceApplication.class, args);
 	}
-	
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		// TODO Auto-generated method stub
-		return builder.sources(EntertainmentServiceApplication.class);
-	}
+
 }
